@@ -1,0 +1,13 @@
+Type,Benign,Other,Pathogenic,Uncertain Significance,Total
+single nucleotide variant,1266545,196,171587,2233672,3672000
+Deletion,31188,8,88211,24470,143877
+Duplication,17610,4,34804,12028,64446
+Microsatellite,13970,3,10524,10183,34680
+Indel,1655,10,7093,8720,17478
+Insertion,4725,4,5711,2251,12691
+copy number loss,132,0,1545,521,2198
+copy number gain,84,0,670,1048,1802
+Inversion,347,0,107,970,1424
+Variation,328,2,1,19,350
+Complex,0,0,5,6,11
+Translocation,0,0,2,0,2

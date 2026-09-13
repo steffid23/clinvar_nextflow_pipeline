@@ -1,0 +1,21 @@
+# Ignore raw data files and cached ClinVar downloads
+data/
+*.gz
+*.txt
+!requirements.txt
+
+# Python cache and environments
+__pycache__/
+*.py[cod]
+.venv/
+env/
+venv/
+
+# Nextflow work directories and logs
+work/
+.nextflow/
+.nextflow.log*
+
+# OS specific files
+.DS_Store
+Thumbs.db

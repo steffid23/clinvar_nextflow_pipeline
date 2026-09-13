@@ -1,0 +1,9 @@
+Metric,Value
+Total Assembly Variants Evaluated,3950959.0
+High-Confidence (>=1 Star) Variants,3950959.0
+Pathogenic / Likely Pathogenic Variants,320260.0
+Benign / Likely Benign Variants,1336584.0
+Uncertain Significance (VUS) Variants,2293888.0
+Unique Genes Harboring Pathogenic Variants,7031.0
+Unique Phenotypes/Diseases Associated with Pathogenic Variants,51895.0
+Pathogenic Variant Percentage (%),8.11
