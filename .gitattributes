@@ -1,0 +1,5 @@
+# Instruct GitHub Linguist to prioritize Shell Scripting and Nextflow DSL2
+bin/generate_ppt.py linguist-vendored
+bin/plot_generator.py linguist-vendored
+main.nf linguist-language=Nextflow
+run_pipeline.sh linguist-language=Shell
