@@ -17,18 +17,6 @@ params.assembly    = "GRCh38"
 params.min_stars   = 1
 params.sample_rows = 0
 
-log.info """
-================================================================================
-                    CLINVAR NEXTFLOW DSL2 PIPELINE
-================================================================================
-ClinVar URL      : ${params.url}
-Genomic Assembly : ${params.assembly}
-Min Star Rating  : ${params.min_stars}
-Data Directory   : ${params.data_dir}
-Results Directory: ${params.results_dir}
-Figures Directory: ${params.figures_dir}
-================================================================================
-"""
 
 process DOWNLOAD_DATA {
     tag "NCBI ClinVar Fetch"
@@ -39,7 +27,7 @@ process DOWNLOAD_DATA {
 
     script:
     """
-    python3 ${projectDir}/bin/download_data.py \
+    python3 "${projectDir}/bin/download_data.py" \
         --url "${params.url}" \
         --output-dir . \
         --filename "variant_summary.txt.gz" \
@@ -59,7 +47,7 @@ process ANALYZE_CLINVAR {
 
     script:
     """
-    python3 ${projectDir}/bin/clinvar_pipeline.py \
+    python3 "${projectDir}/bin/clinvar_pipeline.py" \
         --input-file ${clinvar_file} \
         --output-dir . \
         --assembly "${params.assembly}" \
@@ -79,7 +67,7 @@ process GENERATE_PLOTS {
 
     script:
     """
-    python3 ${projectDir}/bin/plot_generator.py \
+    python3 "${projectDir}/bin/plot_generator.py" \
         --results-dir . \
         --output-dir . \
         --dpi 300
@@ -87,6 +75,19 @@ process GENERATE_PLOTS {
 }
 
 workflow {
+    log.info """
+================================================================================
+                    CLINVAR NEXTFLOW DSL2 PIPELINE
+================================================================================
+ClinVar URL      : ${params.url}
+Genomic Assembly : ${params.assembly}
+Min Star Rating  : ${params.min_stars}
+Data Directory   : ${params.data_dir}
+Results Directory: ${params.results_dir}
+Figures Directory: ${params.figures_dir}
+================================================================================
+"""
+
     DOWNLOAD_DATA()
     ANALYZE_CLINVAR(DOWNLOAD_DATA.out.clinvar_txt)
     GENERATE_PLOTS(ANALYZE_CLINVAR.out.csv_tables)

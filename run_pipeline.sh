@@ -102,15 +102,13 @@ ${PYTHON_CMD} "${BIN_DIR}/clinvar_pipeline.py" \
     --min-stars 1 \
     --chunk-size 250000
 
-# Step 6: Generate Publication Visualizations & Presentation
+# Step 6: Generate Publication Visualizations
 echo "--------------------------------------------------------------------------------"
-echo "[STEP 6/6] Generating 300 DPI Publication Figures & Presentation Deck..."
+echo "[STEP 6/6] Generating 300 DPI Publication Figures..."
 ${PYTHON_CMD} "${BIN_DIR}/plot_generator.py" \
     --results-dir "${RESULTS_DIR}" \
     --output-dir "${FIGURES_DIR}" \
     --dpi 300
-
-${PYTHON_CMD} "${BIN_DIR}/generate_ppt.py"
 
 echo "--------------------------------------------------------------------------------"
 echo "================================================================================"

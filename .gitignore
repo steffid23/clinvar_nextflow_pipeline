@@ -11,10 +11,11 @@ __pycache__/
 env/
 venv/
 
-# Nextflow work directories and logs
+# Nextflow work directories, binaries and logs
 work/
 .nextflow/
 .nextflow.log*
+nextflow
 
 # OS specific files
 .DS_Store

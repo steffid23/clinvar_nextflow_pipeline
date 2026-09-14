@@ -90,10 +90,45 @@ def main():
     gz_target = os.path.join(args.output_dir, args.filename)
     txt_target = os.path.splitext(gz_target)[0]
     
-    download_file(args.url, gz_target, force=args.force)
+    # Check if decompressed file already exists in local data cache
+    possible_caches = [
+        txt_target,
+        os.path.join("data", "variant_summary.txt"),
+        os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "variant_summary.txt"),
+        os.path.join(args.output_dir, "..", "data", "variant_summary.txt")
+    ]
     
-    if not args.no_extract:
-        extract_gzip(gz_target, txt_target, force=args.force)
+    found_cache = None
+    for cache_path in possible_caches:
+        if os.path.exists(cache_path) and os.path.getsize(cache_path) > 100000000:
+            found_cache = cache_path
+            break
+            
+    if found_cache:
+        print(f"[CACHE HIT] Found existing dataset at {found_cache} ({os.path.getsize(found_cache) / (1024*1024):.2f} MB).")
+        if os.path.abspath(found_cache) != os.path.abspath(txt_target):
+            print(f"[CACHE LINK] Linking {found_cache} -> {txt_target}...")
+            shutil.copyfile(found_cache, txt_target)
+    else:
+        # Check gz cache
+        gz_caches = [
+            gz_target,
+            os.path.join("data", "variant_summary.txt.gz"),
+            os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "data", "variant_summary.txt.gz")
+        ]
+        found_gz = None
+        for gz_path in gz_caches:
+            if os.path.exists(gz_path) and os.path.getsize(gz_path) > 1000000:
+                found_gz = gz_path
+                break
+                
+        if found_gz and os.path.abspath(found_gz) != os.path.abspath(gz_target):
+            shutil.copyfile(found_gz, gz_target)
+            
+        download_file(args.url, gz_target, force=args.force)
+        
+        if not args.no_extract:
+            extract_gzip(gz_target, txt_target, force=args.force)
         
     if args.sample_rows > 0:
         sample_path = os.path.join(args.output_dir, f"variant_summary_sample_{args.sample_rows}.txt")
