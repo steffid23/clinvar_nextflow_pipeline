@@ -4,18 +4,19 @@ data/
 *.txt
 !requirements.txt
 
+# Ignore Nextflow HTML reports and work directories
+results/reports/
+*.html
+work/
+.nextflow/
+.nextflow.log*
+
 # Python cache and environments
 __pycache__/
 *.py[cod]
 .venv/
 env/
 venv/
-
-# Nextflow work directories, binaries and logs
-work/
-.nextflow/
-.nextflow.log*
-nextflow
 
 # OS specific files
 .DS_Store

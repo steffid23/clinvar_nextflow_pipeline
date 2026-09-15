@@ -1,5 +1,13 @@
-# Instruct GitHub Linguist to prioritize Shell Scripting and Nextflow DSL2
-bin/generate_ppt.py linguist-vendored
-bin/plot_generator.py linguist-vendored
-main.nf linguist-language=Nextflow
-run_pipeline.sh linguist-language=Shell
+# Prioritize Shell Scripting and Nextflow DSL2 for GitHub Linguist
+run_pipeline.sh linguist-language=Shell linguist-detectable=true
+pure_shell_pipeline.sh linguist-language=Shell linguist-detectable=true
+main.nf linguist-language=Nextflow linguist-detectable=true
+nextflow.config linguist-language=Nextflow linguist-detectable=true
+
+# Vendor generated HTML execution reports, data tables, images, and helper scripts
+results/reports/* linguist-vendored
+*.html linguist-vendored
+*.csv linguist-vendored
+*.png linguist-vendored
+*.pptx linguist-vendored
+bin/*.py linguist-vendored
